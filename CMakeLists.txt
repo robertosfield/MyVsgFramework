@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(vsgFramework)
+project(MyVsgFramework
+        VERSION 0.0.0
+        DESCRIPTION "Test of vsgFramework"
+        LANGUAGES CXX
+)
 
 include(ExternalProject)
 
@@ -176,7 +180,7 @@ endif()
 #
 # vsgExamples
 #
-OPTION(build_vsgExamples "Build vsgExamples" ON)
+OPTION(build_vsgExamples "Build vsgExamples" OFF)
 if (${build_vsgExamples})
     set(vsgExamples "vsgExamples")
     ExternalProject_Add(vsgExamples
@@ -187,3 +191,9 @@ if (${build_vsgExamples})
     )
     ExternalProject_Add_StepDependencies(vsgExamples build ${VulkanSceneGraph} ${vsgXchange} ${vsgImGui})
 endif()
+
+##############################################################################################################
+#
+# The application that uses all of the above external proejcts
+#
+add_subdirectory(application)
